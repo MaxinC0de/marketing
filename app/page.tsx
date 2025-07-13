@@ -1,6 +1,8 @@
 import About from "./components/about"
 import Banner from "./components/banner"
+import Gallery from "./components/gallery"
 import Marquee from "./components/marquee"
+import Ratings from "./components/ratings"
 import Skills from "./components/skills"
 
 export default function Home() {
@@ -10,7 +12,8 @@ export default function Home() {
       <Skills />
       <About />
       <Marquee />
-      <div className="mt-[20vh]"></div>
+      <Gallery />
+      <Ratings />
     </div>
   )
 }
