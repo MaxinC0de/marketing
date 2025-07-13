@@ -1,5 +1,14 @@
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
+import SmoothScrollWrapper from "./components/smoothScroll"
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased bg-black`}>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        <SmoothScrollWrapper>{children}</SmoothScrollWrapper>
+      </body>
     </html>
   )
 }
