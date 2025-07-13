@@ -8,13 +8,13 @@ export default function ProjectCard({ project }) {
       <p className="opacity-80">/ {project.year}</p>
       <h2 className="text-lg font-black">{project.name}</h2>
       <Image
-        src=""
+        src={`/images/projects/${project.src}.png`}
         alt=""
         width={700}
         height={300}
         className="object-cover w-full h-auto"
       />
-      <div className="absolute bottom-3 right-3 bg-white px-3 py-1 font-black rounded-2xl">
+      <div className="absolute bottom-6 right-6 bg-white text-black px-3 py-1 font-black rounded-2xl">
         {project.type}
       </div>
     </article>

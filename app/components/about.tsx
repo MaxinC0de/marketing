@@ -6,11 +6,11 @@ export default function About() {
       <div className="absolute"></div>
       <div className="flex flex-col justify-between gap-y-3">
         <Image
-          src="/images/banner.png"
+          src="/images/about.png"
           alt=""
           width={700}
           height={300}
-          className="w-full h-[20vh] rounded-2xl object-cover"
+          className="w-full h-[10vh] rounded-2xl object-cover"
         />
         <p>
           Nous transformons vos ambitions en émotions, en façonnant des
