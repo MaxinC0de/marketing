@@ -1,9 +1,8 @@
 "use client"
 
+import { useSkillsAnimation } from "@/src/gsap/useSkillsAnimation"
 import { CircleArrowRight } from "lucide-react"
-import Image from "next/image"
 import { useRef, useState } from "react"
-import { useSkillsAnimation } from "../animations/useSkillsAnimation"
 
 export default function Skills() {
   const LABELS = [
@@ -12,28 +11,29 @@ export default function Skills() {
     "STRATEGIE DIGITALE",
     "CONTENU DE MARQUE",
   ]
-  const [activeIndex, setActiveIndex] = useState(null)
+  const [indexSkill, setIndexSkill] = useState(null)
   const refs = useRef([])
-  useSkillsAnimation(refs, activeIndex)
+  useSkillsAnimation(refs, indexSkill)
   return (
-    <section className="w-[97vw] flex flex-col justify-center mx-[3vw] mt-6 bg-[#1b1b1b] rounded-2xl text-white p-6">
-      {LABELS.map((el, i) => (
+    <section className="flex flex-col bg-[#1b1b1b] text-white rounded-2xl mt-3">
+      {LABELS.map((label, i) => (
         <div
-          onMouseOver={() => {
-            setActiveIndex(i)
+          key={label}
+          onMouseEnter={() => {
+            setIndexSkill(i)
           }}
           onMouseLeave={() => {
-            setActiveIndex(null)
+            setIndexSkill(null)
           }}
-          className={`relative flex justify-between ${i > 0 ? "mt-6" : ""}`}
+          className="relative flex justify-between p-3 cursor-pointer"
         >
-          <p className="opacity-75">{el}</p>
+          <p>{label}</p>
           <CircleArrowRight />
           <div
             ref={(el) => {
               if (el) refs.current[i] = el
             }}
-            className={`absolute opacity-0 left-1/2 -translate-x-1/2 bg-white w-24 h-24 rounded-2xl ${i === 0 % 2 ? "-rotate-10" : "rotate-10"}`}
+            className={`absolute w-24 h-24 bg-white left-1/2 opacity-0 ${i % 2 === 0 ? "rotate-10" : "-rotate-10"}`}
           ></div>
         </div>
       ))}

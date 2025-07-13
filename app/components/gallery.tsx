@@ -1,42 +1,33 @@
 import ProjectCard from "./projectCard"
 
 export default function Gallery() {
-  const labels = [
+  const projects = [
     {
       name: "PRESIDENT",
-      year: 2022,
-      src: "",
+      year: "2022",
       type: "BRANDING",
     },
     {
       name: "LINDT",
-      year: 2021,
-      src: "",
+      year: "2021",
       type: "BRANDING",
     },
     {
       name: "QUICK",
-      year: 2023,
-      src: "",
+      year: "2023",
       type: "BRANDING",
     },
     {
       name: "LORINA",
-      year: 2020,
-      src: "",
+      year: "2020",
       type: "BRANDING",
     },
   ]
   return (
-    <div className="flex flex-col bg-black gap-y-6 py-6">
-      <h1 className="text-white text-2xl font-black ml-[3vw]">
-        NOS PROJETS PHARES
-      </h1>
-      <div className="flex flex-wrap justify-center gap-x-3 gap-y-12">
-        {labels.map((project, i) => (
-          <ProjectCard key={project.name} project={project} />
-        ))}
-      </div>
-    </div>
+    <section className="flex flex-col items-center gap-6 p-3 bg-black">
+      {projects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </section>
   )
 }

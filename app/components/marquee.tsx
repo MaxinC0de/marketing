@@ -1,8 +1,8 @@
 "use client"
 
+import { useMarqueeAnimation } from "@/src/gsap/useMarqueeAnimation"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { useMarqueeAnimation } from "../animations/useMarqueeAnimation"
 
 export default function Marquee() {
   const LABELS = [
@@ -15,43 +15,46 @@ export default function Marquee() {
     "quick",
     "shell",
   ]
-  const [brandSize, setBrandSize] = useState(null)
+  const [brandWidth, setBrandWidth] = useState(null)
   const containerRef = useRef(null)
-  const calculateBrandSizeRef = useRef(null)
+  const calculateRef = useRef(null)
   useEffect(() => {
-    setBrandSize(
-      (calculateBrandSizeRef.current?.offsetWidth / LABELS.length) * 0.6,
-    )
+    const brandWidth =
+      (calculateRef?.current?.offsetWidth / LABELS.length) * 0.72
+    setBrandWidth(brandWidth)
   }, [])
   useMarqueeAnimation(containerRef)
   return (
-    <div ref={containerRef} className="flex w-[200%] will-change-transform">
+    <div
+      ref={containerRef}
+      className="overflow-hidden flex justify-center w-[200vw] will-change-transform"
+    >
       <div
-        ref={calculateBrandSizeRef}
-        className="flex justify-around w-[100vw] mt-12 bg-black py-3"
+        ref={calculateRef}
+        className="flex w-[100vw] gap-x-3 p-3 pr-0 bg-black will"
       >
-        {LABELS.map((brand) => (
+        {LABELS.map((label) => (
           <Image
-            key={brand}
-            src={`/images/marquee/${brand}.png`}
+            key={label}
+            src={`/images/marquee/${label}.png`}
             alt=""
             width={700}
             height={300}
-            className="object-contain"
-            style={{ width: brandSize ? `${brandSize}px` : undefined }}
+            className="object-contain flex-none h-auto"
+            style={{ width: `${brandWidth}px` }}
           />
         ))}
       </div>
-      <div className="flex justify-around w-[100vw] mt-12 bg-black py-3">
-        {LABELS.map((brand) => (
+      <div className="flex w-[100vw] gap-x-3 p-3 pl-0 bg-black">
+        {LABELS.map((label) => (
           <Image
-            key={brand}
-            src={`/images/marquee/${brand}.png`}
+            key={label}
+            src={`/images/marquee/${label}.png`}
             alt=""
             width={700}
             height={300}
-            className="object-contain"
-            style={{ width: brandSize ? `${brandSize}px` : undefined }}
+            className="object-contain h-auto"
+            style={{ width: `${brandWidth}px` }}
           />
         ))}
       </div>
