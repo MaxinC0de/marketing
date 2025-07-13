@@ -1,15 +1,16 @@
+import About from "./components/about"
 import Banner from "./components/banner"
-import Header from "./components/header"
 import Marquee from "./components/marquee"
-import Showcase from "./components/showcase"
+import Skills from "./components/skills"
 
 export default function Home() {
   return (
-    <div>
-      <Header />
+    <div className="overflow-hidden">
       <Banner />
-      <Showcase />
+      <Skills />
+      <About />
       <Marquee />
+      <div className="mt-[20vh]"></div>
     </div>
   )
 }

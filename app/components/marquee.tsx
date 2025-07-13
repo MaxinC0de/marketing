@@ -1,10 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { dyna } from "../fonts"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useMarqueeAnimation } from "../animations/useMarqueeAnimation"
 
 export default function Marquee() {
   const LABELS = [
@@ -17,56 +15,44 @@ export default function Marquee() {
     "quick",
     "shell",
   ]
+  const [brandSize, setBrandSize] = useState(null)
   const containerRef = useRef(null)
-  const contentRef = useRef(null)
-  useGSAP(() => {
-    const contentWidth = contentRef.current.offsetWidth / 2
-    gsap.fromTo(
-      contentRef.current,
-      { x: 0 },
-      {
-        x: -contentWidth,
-        duration: 10,
-        ease: "linear",
-        repeat: -1,
-      },
+  const calculateBrandSizeRef = useRef(null)
+  useEffect(() => {
+    setBrandSize(
+      (calculateBrandSizeRef.current?.offsetWidth / LABELS.length) * 0.6,
     )
   }, [])
+  useMarqueeAnimation(containerRef)
   return (
-    <div ref={containerRef} className="overflow-hidden">
-      <div className="flex justify-center items-center text-2xl font-bold my-[15vh]">
-        <p className="text-5xl leading-0">
-          DES ESPRITS CREATIFS AU <br /> SERVICE DE VOTRE{" "}
-          <span className={`${dyna.className} !font-medium text-8xl`}>
-            marque
-          </span>
-        </p>
-      </div>
+    <div ref={containerRef} className="flex w-[200%] will-change-transform">
       <div
-        ref={contentRef}
-        className="flex items-center gap-x-6 min-w-max h-[10vh] bg-black"
+        ref={calculateBrandSizeRef}
+        className="flex justify-around w-[100vw] mt-12 bg-black py-3"
       >
-        {LABELS.map((src, i) => (
-          <div className="w-26 h-auto object-cover">
-            <Image
-              src={`/images/marquee/${src}.png`}
-              alt=""
-              width={700}
-              height={300}
-              className="w-full h-auto"
-            />
-          </div>
+        {LABELS.map((brand) => (
+          <Image
+            key={brand}
+            src={`/images/marquee/${brand}.png`}
+            alt=""
+            width={700}
+            height={300}
+            className="object-contain"
+            style={{ width: brandSize ? `${brandSize}px` : undefined }}
+          />
         ))}
-        {LABELS.map((src, i) => (
-          <div className="w-24 h-auto object-cover">
-            <Image
-              src={`/images/marquee/${src}.png`}
-              alt=""
-              width={700}
-              height={300}
-              className="w-full h-auto"
-            />
-          </div>
+      </div>
+      <div className="flex justify-around w-[100vw] mt-12 bg-black py-3">
+        {LABELS.map((brand) => (
+          <Image
+            key={brand}
+            src={`/images/marquee/${brand}.png`}
+            alt=""
+            width={700}
+            height={300}
+            className="object-contain"
+            style={{ width: brandSize ? `${brandSize}px` : undefined }}
+          />
         ))}
       </div>
     </div>
