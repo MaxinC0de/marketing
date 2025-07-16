@@ -11,6 +11,7 @@ export function useRatingsAnimation(animatedRef) {
         gsap.to(animatedRef.current, {
           opacity: 1,
           duration: 1.5,
+          delay: 0.3,
 
           scrollTrigger: {
             trigger: animatedRef.current,

@@ -5,11 +5,14 @@ export function useSkillsAnimation(refs, indexSkill) {
   useGSAP(() => {
     refs.current.forEach((el, i) => {
       if (!el) return
-      if (i === indexSkill) {
-        gsap.to(el, { opacity: 1 })
-      } else {
-        gsap.to(el, { opacity: 0 })
-      }
+      const isActive = i === indexSkill
+      gsap.to(el, {
+        opacity: isActive ? 1 : 0,
+        y: isActive ? -20 : 0,
+        rotate: isActive ? (i % 2 === 0 ? -10 : 10) : 0,
+        duration: 0.6,
+        ease: "power2.out",
+      })
     })
   }, [indexSkill])
 }

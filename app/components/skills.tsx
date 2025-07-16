@@ -2,6 +2,7 @@
 
 import { useSkillsAnimation } from "@/src/gsap/useSkillsAnimation"
 import { CircleArrowRight } from "lucide-react"
+import Image from "next/image"
 import { useRef, useState } from "react"
 
 export default function Skills() {
@@ -25,16 +26,22 @@ export default function Skills() {
           onMouseLeave={() => {
             setIndexSkill(null)
           }}
-          className="relative flex justify-between p-3 cursor-pointer"
+          className="relative flex justify-between group p-3 cursor-pointer"
         >
-          <p>{label}</p>
+          <p className="group-hover:opacity-100 opacity-80 transition-all duration-500">
+            {label}
+          </p>
           <CircleArrowRight />
-          <div
+          <Image
+            src={`/images/skills/${i}.png`}
+            alt=""
+            width={700}
+            height={300}
             ref={(el) => {
               if (el) refs.current[i] = el
             }}
-            className={`absolute w-24 h-24 bg-white left-1/2 opacity-0 ${i % 2 === 0 ? "rotate-10" : "-rotate-10"}`}
-          ></div>
+            className="absolute z-10 -top-4/5 left-1/2 opacity-0 object-cover w-48 h-auto"
+          ></Image>
         </div>
       ))}
     </section>
